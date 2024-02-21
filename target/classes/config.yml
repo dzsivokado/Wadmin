@@ -1,0 +1,21 @@
+# __    __          _           _
+#/ / /\ \ \__ _  __| |_ __ ___ (_)_ __
+#\ \/  \/ / _` |/ _` | '_ ` _ \| | '_ \
+# \  /\  / (_| | (_| | | | | | | | | | |
+#  \/  \/ \__,_|\__,_|_| |_| |_|_|_| |_|
+
+# Error Messages
+non_specified_player: "§cPlease specify a player"
+player_not_found: "§cPlayer not found"
+
+# Event Messages
+creeper_msg: "%target% nigger"
+clear_msg: "%target% nigger"
+kill_msg: "%target% nigger"
+tnt_msg: "%target% nigger"
+air_msg: "%target% nigger"
+explode_msg: "%target% nigger"
+
+# Default Values
+default_tnt: 69
+default_creeper: 420
