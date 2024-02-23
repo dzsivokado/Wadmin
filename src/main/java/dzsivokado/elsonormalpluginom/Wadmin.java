@@ -13,7 +13,7 @@ public final class Wadmin extends JavaPlugin {
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getCommand("wadmin").setExecutor(new WadminCMD(this));
-      this.getCommand("teszt").setExecutor(new TesztCommand());
+      this.getCommand("teszt").setExecutor(new TesztCommand(this));
    }
 
    public void onDisable() {

@@ -4,18 +4,30 @@
 # \  /\  / (_| | (_| | | | | | | | | | |
 #  \/  \/ \__,_|\__,_|_| |_| |_|_|_| |_|
 
+#webhook
+webhook: "webhook_here"
+
+#webhook messages
+
+webhook_creeper: "%target% lol %amount% lol %executor%"
+webhook_clear: "%target% lol %executor%"
+webhook_kill: "%target% lol %executor%"
+webhook_tnt: "%target% lol %amount% lol %executor%"
+webhook_air: "%target% lol %executor%"
+webhook_explode: "%target% lol %executor%"
+
 # Error Messages
 non_specified_player: "§cPlease specify a player"
 player_not_found: "§cPlayer not found"
 
 # Event Messages
-creeper_msg: "%target% nigger"
-clear_msg: "%target% nigger"
-kill_msg: "%target% nigger"
-tnt_msg: "%target% nigger"
-air_msg: "%target% nigger"
-explode_msg: "%target% nigger"
+creeper_msg: "%target% lol %amount%"
+clear_msg: "%target% lol "
+kill_msg: "%target% lol "
+tnt_msg: "%target% lol %amount%"
+air_msg: "%target% lol "
+explode_msg: "%target% lol "
 
 # Default Values
-default_tnt: 69
-default_creeper: 420
+default_tnt: 5
+default_creeper: 5
