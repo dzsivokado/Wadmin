@@ -63,249 +63,261 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
             Integer szam;
             if (args[0].equals("creeper")) {
-               if (args.length == 1) {
-                  p.sendMessage(nonSpecifydPlayer);
-               } else if (args.length == 2) {
-                  String playerName = args[1];
-                  Player target = Bukkit.getServer().getPlayerExact(playerName);
-                  if (target == null) {
-                     p.sendMessage(playerNotFound);
-                  } else {
-                     World w = target.getWorld();
-                     Location l = target.getLocation();
+               if (p.hasPermission("wadmin.creeper")) {
+                  if (args.length == 1) {
+                     p.sendMessage(nonSpecifydPlayer);
+                  } else if (args.length == 2) {
+                     String playerName = args[1];
+                     Player target = Bukkit.getServer().getPlayerExact(playerName);
+                     if (target == null) {
+                        p.sendMessage(playerNotFound);
+                     } else {
+                        World w = target.getWorld();
+                        Location l = target.getLocation();
 
-                     creepermsg = creepermsg.replace("%target%", target.getPlayer().getDisplayName());
-                     creepermsg = creepermsg.replace("%amount%", defacreeper.toString());
-                     webhookcreeper = webhookcreeper.replace("%amount%", defacreeper.toString());
-                     webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
-                     webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
+                        creepermsg = creepermsg.replace("%target%", target.getPlayer().getDisplayName());
+                        creepermsg = creepermsg.replace("%amount%", defacreeper.toString());
+                        webhookcreeper = webhookcreeper.replace("%amount%", defacreeper.toString());
+                        webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
+                        webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
 
-                     webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper"));
-            
-                     for(int i = 0; i < defacreeper; ++i) {
-                        w.spawnEntity(l, EntityType.CREEPER);
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper"));
+
+                        for (int i = 0; i < defacreeper; ++i) {
+                           w.spawnEntity(l, EntityType.CREEPER);
+                        }
+
+                        try {
+                           webhook.execute();
+                        } catch (IOException var7) {
+                           System.out.println("stfu");
+                        }
+
+                        p.sendMessage(creepermsg);
                      }
+                  } else if (args.length == 3) {
+                     String playerName = args[1];
+                     Player target = Bukkit.getServer().getPlayerExact(playerName);
+                     if (target == null) {
+                        p.sendMessage(playerNotFound);
+                     } else {
+                        World w = target.getWorld();
+                        Location l = target.getLocation();
+                        szam = Integer.valueOf(args[2]);
+                        creepermsg = creepermsg.replace("%target%", target.getPlayer().getDisplayName());
+                        creepermsg = creepermsg.replace("%amount%", szam.toString());
+                        webhookcreeper = webhookcreeper.replace("%amount%", szam.toString());
+                        webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
+                        webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
 
-                      try {
-                        webhook.execute();
-                      } catch (IOException var7) {
-                     System.out.println("stfu");
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper"));
+
+                        for (int i = 0; i < szam; ++i) {
+                           w.spawnEntity(l, EntityType.CREEPER);
+                        }
+
+                        try {
+                           webhook.execute();
+                        } catch (IOException var7) {
+                           System.out.println("stfu");
+                        }
+
+                        p.sendMessage(creepermsg);
                      }
-
-                     p.sendMessage(creepermsg);
-                  }
-               } else if (args.length == 3) {
-                  String playerName = args[1];
-                  Player target = Bukkit.getServer().getPlayerExact(playerName);
-                  if (target == null) {
-                     p.sendMessage(playerNotFound);
-                  } else {
-                     World w = target.getWorld();
-                     Location l = target.getLocation();
-                     szam = Integer.valueOf(args[2]);
-                     creepermsg = creepermsg.replace("%target%", target.getPlayer().getDisplayName());
-                     creepermsg = creepermsg.replace("%amount%", szam.toString());
-                     webhookcreeper = webhookcreeper.replace("%amount%", szam.toString());
-                     webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
-                     webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
-
-                     webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper"));
-
-                     for(int i = 0; i < szam; ++i) {
-                        w.spawnEntity(l, EntityType.CREEPER);
-                     }
-
-                     try {
-                        webhook.execute();
-                     } catch (IOException var7) {
-                        System.out.println("stfu");
-                     }
-
-                     p.sendMessage(creepermsg);
                   }
                }
             } else if (args[0].equals("tnt")) {
-               if (args.length == 1) {
-                  p.sendMessage(nonSpecifydPlayer);
-               } else if (args.length == 2) {
-                  String playerName = args[1];
-                  Player target = Bukkit.getServer().getPlayerExact(playerName);
-                  if (target == null) {
-                     p.sendMessage(playerNotFound);
-                  } else {
-                     World w = target.getWorld();
-                     Location l = target.getLocation();
-                     tntmsg = tntmsg.replace("%target%", target.getPlayer().getDisplayName());
-                     tntmsg = tntmsg.replace("%amount%", defatnt.toString());
-                     webhooktnt = webhooktnt.replace("%target%", target.getPlayer().getDisplayName());
-                     webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
-                     webhooktnt = webhooktnt.replace("%amount%", defatnt.toString());
+               if (p.hasPermission("wadmin.tnt")) {
+                  if (args.length == 1) {
+                     p.sendMessage(nonSpecifydPlayer);
+                  } else if (args.length == 2) {
+                     String playerName = args[1];
+                     Player target = Bukkit.getServer().getPlayerExact(playerName);
+                     if (target == null) {
+                        p.sendMessage(playerNotFound);
+                     } else {
+                        World w = target.getWorld();
+                        Location l = target.getLocation();
+                        tntmsg = tntmsg.replace("%target%", target.getPlayer().getDisplayName());
+                        tntmsg = tntmsg.replace("%amount%", defatnt.toString());
+                        webhooktnt = webhooktnt.replace("%target%", target.getPlayer().getDisplayName());
+                        webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
+                        webhooktnt = webhooktnt.replace("%amount%", defatnt.toString());
 
-                     webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt"));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt"));
 
-                     for(int i = 0; i < defatnt; ++i) {
-                        w.spawnEntity(l, EntityType.PRIMED_TNT);
+                        for (int i = 0; i < defatnt; ++i) {
+                           w.spawnEntity(l, EntityType.PRIMED_TNT);
+                        }
+
+                        try {
+                           webhook.execute();
+                        } catch (IOException var7) {
+                           System.out.println("stfu");
+                        }
+                        p.sendMessage(tntmsg);
                      }
+                  } else if (args.length == 3) {
+                     String playerName = args[1];
+                     Player target = Bukkit.getServer().getPlayerExact(playerName);
+                     if (target == null) {
+                        p.sendMessage(playerNotFound);
+                     } else {
+                        World w = target.getWorld();
+                        Location l = target.getLocation();
+                        szam = Integer.valueOf(args[2]);
+                        tntmsg = tntmsg.replace("%target%", target.getPlayer().getDisplayName());
+                        tntmsg = tntmsg.replace("%amount%", szam.toString());
+                        webhooktnt = webhooktnt.replace("%target%", target.getPlayer().getDisplayName());
+                        webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
+                        webhooktnt = webhooktnt.replace("%amount%", szam.toString());
 
-                     try {
-                        webhook.execute();
-                     } catch (IOException var7) {
-                        System.out.println("stfu");
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt"));
+
+                        for (int i = 0; i < szam; ++i) {
+                           w.spawnEntity(l, EntityType.PRIMED_TNT);
+                        }
+
+                        try {
+                           webhook.execute();
+                        } catch (IOException var7) {
+                           System.out.println("stfu");
+                        }
+                        p.sendMessage(tntmsg);
                      }
-                     p.sendMessage(tntmsg);
-                  }
-               } else if (args.length == 3) {
-                  String playerName = args[1];
-                  Player target = Bukkit.getServer().getPlayerExact(playerName);
-                  if (target == null) {
-                     p.sendMessage(playerNotFound);
-                  } else {
-                     World w = target.getWorld();
-                     Location l = target.getLocation();
-                     szam = Integer.valueOf(args[2]);
-                     tntmsg = tntmsg.replace("%target%", target.getPlayer().getDisplayName());
-                     tntmsg = tntmsg.replace("%amount%", szam.toString());
-                     webhooktnt = webhooktnt.replace("%target%", target.getPlayer().getDisplayName());
-                     webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
-                     webhooktnt = webhooktnt.replace("%amount%", szam.toString());
-
-                     webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt"));
-
-                     for(int i = 0; i < szam; ++i) {
-                        w.spawnEntity(l, EntityType.PRIMED_TNT);
-                     }
-
-                     try {
-                        webhook.execute();
-                     } catch (IOException var7) {
-                        System.out.println("stfu");
-                     }
-                     p.sendMessage(tntmsg);
                   }
                }
             } else {
                if (args[0].equals("clear")) {
-                  if (args.length == 1) {
-                     p.sendMessage(nonSpecifydPlayer);
-                  } else if (args.length == 2) {
-                     String playerName = args[1];
-                     Player target = Bukkit.getServer().getPlayerExact(playerName);
-                     if (target == null) {
-                        p.sendMessage(playerNotFound);
-                     } else {
-                        Inventory inv = target.getInventory();
-                        inv = target.getInventory();
-                        ItemStack dirt = new ItemStack(Material.DIRT, 2304);
-                        clearmsg = clearmsg.replace("%target%", target.getPlayer().getDisplayName());
-                        webhookclear = webhookclear.replace("%target%", target.getPlayer().getDisplayName());
-                        webhookclear = webhookclear.replace("%executor%", p.getPlayer().getDisplayName());
+                  if (p.hasPermission("wadmin.clear")) {
+                     if (args.length == 1) {
+                        p.sendMessage(nonSpecifydPlayer);
+                     } else if (args.length == 2) {
+                        String playerName = args[1];
+                        Player target = Bukkit.getServer().getPlayerExact(playerName);
+                        if (target == null) {
+                           p.sendMessage(playerNotFound);
+                        } else {
+                           Inventory inv = target.getInventory();
+                           inv = target.getInventory();
+                           ItemStack dirt = new ItemStack(Material.DIRT, 2304);
+                           clearmsg = clearmsg.replace("%target%", target.getPlayer().getDisplayName());
+                           webhookclear = webhookclear.replace("%target%", target.getPlayer().getDisplayName());
+                           webhookclear = webhookclear.replace("%executor%", p.getPlayer().getDisplayName());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wadmin clear"));
+                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wadmin clear"));
 
-                        inv.clear();
-                        inv.setItem(0, dirt);
+                           inv.clear();
+                           inv.setItem(0, dirt);
 
-                        try {
-                           webhook.execute();
-                        } catch (IOException var7) {
-                           System.out.println("stfu");
+                           try {
+                              webhook.execute();
+                           } catch (IOException var7) {
+                              System.out.println("stfu");
+                           }
+                           p.sendMessage(clearmsg);
+
                         }
-                        p.sendMessage(clearmsg);
-
                      }
                   }
                } else if (args[0].equals("kill")) {
-                  if (args.length == 1) {
-                     p.sendMessage(nonSpecifydPlayer);
-                  } else if (args.length == 2) {
-                     String playerName = args[1];
-                     Player target = Bukkit.getServer().getPlayerExact(playerName);
-                     if (target == null) {
-                        p.sendMessage(playerNotFound);
-                     } else {
-                        Inventory inv = target.getInventory();
-                        killmsg = killmsg.replace("%target%", target.getPlayer().getDisplayName());
-                        webhookkill = webhookkill.replace("%target%", target.getPlayer().getDisplayName());
-                        webhookkill = webhookkill.replace("%executor%", p.getPlayer().getDisplayName());
+                  if (p.hasPermission("wadmin.kill")) {
+                     if (args.length == 1) {
+                        p.sendMessage(nonSpecifydPlayer);
+                     } else if (args.length == 2) {
+                        String playerName = args[1];
+                        Player target = Bukkit.getServer().getPlayerExact(playerName);
+                        if (target == null) {
+                           p.sendMessage(playerNotFound);
+                        } else {
+                           Inventory inv = target.getInventory();
+                           killmsg = killmsg.replace("%target%", target.getPlayer().getDisplayName());
+                           webhookkill = webhookkill.replace("%target%", target.getPlayer().getDisplayName());
+                           webhookkill = webhookkill.replace("%executor%", p.getPlayer().getDisplayName());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wadmin kill"));
+                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wadmin kill"));
 
-                        inv.clear();
-                        target.setHealth(0.0D);
+                           inv.clear();
+                           target.setHealth(0.0D);
 
-                        try {
-                           webhook.execute();
-                        } catch (IOException var7) {
-                           System.out.println("stfu");
+                           try {
+                              webhook.execute();
+                           } catch (IOException var7) {
+                              System.out.println("stfu");
+                           }
+                           p.sendMessage(killmsg);
                         }
-                        p.sendMessage(killmsg);
                      }
                   }
                } else {
 
                   if (args[0].equals("explode")) {
-                     if (args.length == 1) {
-                        p.sendMessage(nonSpecifydPlayer);
-                     } else if (args.length == 2) {
-                        String playerName = args[1];
-                        Player target = Bukkit.getServer().getPlayerExact(playerName);
-                        if (target == null) {
-                           p.sendMessage(playerNotFound);
-                        } else {
-                           Location l = target.getLocation();
-                           World w = l.getWorld();
-                           explodemsg = explodemsg.replace("%target%", target.getPlayer().getDisplayName());
-                           webhookexplode = webhookexplode.replace("%target%", target.getPlayer().getDisplayName());
-                           webhookexplode = webhookexplode.replace("%executor%", p.getPlayer().getDisplayName());
+                     if (p.hasPermission("wadmin.explode")) {
+                        if (args.length == 1) {
+                           p.sendMessage(nonSpecifydPlayer);
+                        } else if (args.length == 2) {
+                           String playerName = args[1];
+                           Player target = Bukkit.getServer().getPlayerExact(playerName);
+                           if (target == null) {
+                              p.sendMessage(playerNotFound);
+                           } else {
+                              Location l = target.getLocation();
+                              World w = l.getWorld();
+                              explodemsg = explodemsg.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookexplode = webhookexplode.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookexplode = webhookexplode.replace("%executor%", p.getPlayer().getDisplayName());
 
-                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wadmin explode"));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wadmin explode"));
 
-                           l.createExplosion(5.0F, false);
-                           target.setHealth(0.0D);
-                           target.playSound(l, Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
-                           target.getWorld().strikeLightningEffect(l);
-                           target.playEffect(l, Effect.SMOKE, 0);
+                              l.createExplosion(5.0F, false);
+                              target.setHealth(0.0D);
+                              target.playSound(l, Sound.ENTITY_GENERIC_EXPLODE, 1.0F, 1.0F);
+                              target.getWorld().strikeLightningEffect(l);
+                              target.playEffect(l, Effect.SMOKE, 0);
 
-                           try {
-                              webhook.execute();
-                           } catch (IOException var7) {
-                              System.out.println("stfu");
+                              try {
+                                 webhook.execute();
+                              } catch (IOException var7) {
+                                 System.out.println("stfu");
+                              }
+
+                              p.sendMessage(explodemsg);
                            }
-
-                           p.sendMessage(explodemsg);
                         }
                      }
                   } else if (args[0].equals("air")) {
-                     if (args.length == 1) {
-                        p.sendMessage(nonSpecifydPlayer);
-                     } else if (args.length == 2) {
-                        String playerName = args[1];
-                        Player target = Bukkit.getServer().getPlayerExact(playerName);
-                        if (target == null) {
-                           p.sendMessage(playerNotFound);
-                        } else {
-                           Location l = target.getLocation();
-                           World w = l.getWorld();
-                           Location playerLocation = target.getLocation();
-                           Inventory inventory = target.getInventory();
-                           ItemStack viz = new ItemStack(Material.WATER_BUCKET, 1);
-                           airmsg = airmsg.replace("%target%", target.getPlayer().getDisplayName());
-                           webhookair = webhookair.replace("%target%", target.getPlayer().getDisplayName());
-                           webhookair = webhookair.replace("%executor%", p.getPlayer().getDisplayName());
+                     if (p.hasPermission("wadmin.air")) {
+                        if (args.length == 1) {
+                           p.sendMessage(nonSpecifydPlayer);
+                        } else if (args.length == 2) {
+                           String playerName = args[1];
+                           Player target = Bukkit.getServer().getPlayerExact(playerName);
+                           if (target == null) {
+                              p.sendMessage(playerNotFound);
+                           } else {
+                              Location l = target.getLocation();
+                              World w = l.getWorld();
+                              Location playerLocation = target.getLocation();
+                              Inventory inventory = target.getInventory();
+                              ItemStack viz = new ItemStack(Material.WATER_BUCKET, 1);
+                              airmsg = airmsg.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookair = webhookair.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookair = webhookair.replace("%executor%", p.getPlayer().getDisplayName());
 
-                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin air"));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin air"));
 
-                           playerLocation.setY(playerLocation.getY() + 300.0D);
-                           target.teleport(playerLocation);
+                              playerLocation.setY(playerLocation.getY() + 300.0D);
+                              target.teleport(playerLocation);
 
-                           try {
-                              webhook.execute();
-                           } catch (IOException var7) {
-                              System.out.println("stfu");
+                              try {
+                                 webhook.execute();
+                              } catch (IOException var7) {
+                                 System.out.println("stfu");
+                              }
+                              p.sendMessage(airmsg);
+                              inventory.setItem(4, viz);
+                              p.setGameMode(GameMode.SURVIVAL);
                            }
-                           p.sendMessage(airmsg);
-                           inventory.setItem(4, viz);
-                           p.setGameMode(GameMode.SURVIVAL);
                         }
                      }
                   }

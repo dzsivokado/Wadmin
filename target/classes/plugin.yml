@@ -13,6 +13,25 @@ commands:
       - "/wadmin kill <player>"
       - "/wadmin explode <player>"
       - "/wadmin air <player>"
-    permission: "wadmin.wadmin"
-  teszt:
-    usage: "teszt"
+permissions:
+  wadmin.*:
+    description: "wadmin commands"
+    children:
+      - wadmin.creeper: true
+      - wadmin.tnt: true
+      - wadmin.clear: true
+      - wadmin.kill: true
+      - wadmin.explode: true
+      - wadmin.air: true
+  wadmin.tnt:
+    description: "wadmin tnt"
+  wadmin.creeper:
+    description: "wadmin creeper"
+  wadmin.clear:
+    description: "wadmin clear"
+  wadmin.kill:
+    description: "wadmin kill"
+  wadmin.explode:
+    description: "wadmin explode"
+  wadmin.air:
+    description: "wadmin air"

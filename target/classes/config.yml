@@ -10,11 +10,11 @@ webhook: "webhook_here"
 #webhook messages
 
 webhook_creeper: "%target% lol %amount% lol %executor%"
-webhook_clear: ""
-webhook_kill: ""
+webhook_clear: "%target% lol %executor%"
+webhook_kill: "%target% lol %executor%"
 webhook_tnt: "%target% lol %amount% lol %executor%"
-webhook_air: ""
-webhook_explode: ""
+webhook_air: "%target% lol %executor%"
+webhook_explode: "%target% lol %executor%"
 
 # Error Messages
 non_specified_player: "§cPlease specify a player"
