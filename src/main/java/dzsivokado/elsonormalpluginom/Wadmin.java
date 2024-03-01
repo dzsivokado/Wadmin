@@ -1,5 +1,6 @@
 package dzsivokado.elsonormalpluginom;
 
+import dzsivokado.elsonormalpluginom.commands.TesztCommand;
 import dzsivokado.elsonormalpluginom.commands.WadminCMD;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,7 +13,12 @@ public final class Wadmin extends JavaPlugin {
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getCommand("wadmin").setExecutor(new WadminCMD(this));
-      //this.getCommand("teszt").setExecutor(new TesztCommand(this));
+      this.getCommand("teszt").setExecutor(new TesztCommand(this));
+      //
+      //getServer().getPluginManager().registerEvents(new TesztCommand(this), this);
+      //
+
+
    }
 
    public void onDisable() {
@@ -22,4 +28,6 @@ public final class Wadmin extends JavaPlugin {
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=======================");
    }
+
+
 }

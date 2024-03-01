@@ -4,6 +4,8 @@ author: Dzsivokado
 main: dzsivokado.elsonormalpluginom.Wadmin
 api-version: '1.18'
 commands:
+  teszt:
+    description: "gg"
   wadmin:
     description: "a Wadmin plugin"
     usage:
@@ -13,6 +15,7 @@ commands:
       - "/wadmin kill <player>"
       - "/wadmin explode <player>"
       - "/wadmin air <player>"
+      - "/wadmin slow <player>"
 permissions:
   wadmin.*:
     description: "wadmin commands"
@@ -23,6 +26,7 @@ permissions:
       - wadmin.kill: true
       - wadmin.explode: true
       - wadmin.air: true
+      - wadmin.slow: true
   wadmin.tnt:
     description: "wadmin tnt"
   wadmin.creeper:
@@ -35,3 +39,5 @@ permissions:
     description: "wadmin explode"
   wadmin.air:
     description: "wadmin air"
+  wadmin.slow:
+    description: "wadmin slow"

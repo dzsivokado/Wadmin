@@ -15,6 +15,8 @@ webhook_kill: "%target% lol %executor%"
 webhook_tnt: "%target% lol %amount% lol %executor%"
 webhook_air: "%target% lol %executor%"
 webhook_explode: "%target% lol %executor%"
+webhook_slow_on: "%target% lol %executor%"
+webhook_slow_off: "%target% lol %executor%"
 
 # Error Messages
 non_specified_player: "§cPlease specify a player"
@@ -27,6 +29,8 @@ kill_msg: "%target% lol "
 tnt_msg: "%target% lol %amount%"
 air_msg: "%target% lol "
 explode_msg: "%target% lol "
+slow_msg_on: "%target% lol "
+slow_msg_off: "%target% lol "
 
 # Default Values
 default_tnt: 5

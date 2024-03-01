@@ -1,15 +1,13 @@
 package dzsivokado.elsonormalpluginom.commands;
 
 import dzsivokado.elsonormalpluginom.Wadmin;
-import dzsivokado.elsonormalpluginom.apis.DiscordWebhook;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-import java.io.IOException;
-
-public class TesztCommand implements CommandExecutor {
+public class TesztCommand implements CommandExecutor, Listener {
 
    private final Wadmin plugin;
 
@@ -20,19 +18,24 @@ public class TesztCommand implements CommandExecutor {
 
    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
       if (sender instanceof Player) {
-         this.webhookURL = this.plugin.getConfig().getString("webhook");
-         
-         DiscordWebhook webhook = new DiscordWebhook(this.webhookURL);
-         webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription("lol"));
+         Player player = (Player) sender;
 
-         try {
-            webhook.execute();
-         } catch (IOException var7) {
-            System.out.println("stfu");
+         if (player.getWalkSpeed() == 0.009f) {
+             player.setWalkSpeed(0.19f);
+             player.sendMessage("ki");
+         }else {
+            player.setWalkSpeed(0.009f);
+            player.setFoodLevel(-1);
+            player.sendMessage("be");
          }
-
+         return true;
       }
 
       return true;
    }
+
+
+
+
+
 }

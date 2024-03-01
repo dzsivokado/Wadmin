@@ -13,6 +13,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +37,8 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
       String creepermsg = this.plugin.getConfig().getString("creeper_msg");
       String airmsg = this.plugin.getConfig().getString("air_msg");
       String explodemsg = this.plugin.getConfig().getString("explode_msg");
+      String slowmsgon = this.plugin.getConfig().getString("slow_msg_on");
+      String slowmsgoff = this.plugin.getConfig().getString("slow_msg_off");
       Integer defatnt = this.plugin.getConfig().getInt("default_tnt");
       Integer defacreeper = this.plugin.getConfig().getInt("default_creeper");
       this.webhookURL = this.plugin.getConfig().getString("webhook");
@@ -45,7 +48,8 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
       String webhookkill = this.plugin.getConfig().getString("webhook_kill");
       String webhookair = this.plugin.getConfig().getString("webhook_air");
       String webhookexplode = this.plugin.getConfig().getString("webhook_explode");
-
+      String webhookslowon = this.plugin.getConfig().getString("webhook_slow_on");
+      String webhookslowoff = this.plugin.getConfig().getString("webhook_slow_off");
 
       DiscordWebhook webhook = new DiscordWebhook(this.webhookURL);
 
@@ -58,6 +62,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
             p.sendMessage("§6/wadmin kill <player>");
             p.sendMessage("§6/wadmin explode <player>");
             p.sendMessage("§6/wadmin air <player>");
+            p.sendMessage("§6/wadmin slow <player> ");
          } else if (args.length >= 1) {
 
 
@@ -81,7 +86,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
                         webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper"));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper").setColor(Color.RED));
 
                         for (int i = 0; i < defacreeper; ++i) {
                            w.spawnEntity(l, EntityType.CREEPER);
@@ -110,7 +115,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
                         webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper"));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper").setColor(Color.RED));
 
                         for (int i = 0; i < szam; ++i) {
                            w.spawnEntity(l, EntityType.CREEPER);
@@ -144,7 +149,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
                         webhooktnt = webhooktnt.replace("%amount%", defatnt.toString());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt"));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt").setColor(Color.RED));
 
                         for (int i = 0; i < defatnt; ++i) {
                            w.spawnEntity(l, EntityType.PRIMED_TNT);
@@ -172,7 +177,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
                         webhooktnt = webhooktnt.replace("%amount%", szam.toString());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt"));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt").setColor(Color.RED));
 
                         for (int i = 0; i < szam; ++i) {
                            w.spawnEntity(l, EntityType.PRIMED_TNT);
@@ -205,7 +210,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            webhookclear = webhookclear.replace("%target%", target.getPlayer().getDisplayName());
                            webhookclear = webhookclear.replace("%executor%", p.getPlayer().getDisplayName());
 
-                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wadmin clear"));
+                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wadmin clear").setColor(Color.RED));
 
                            inv.clear();
                            inv.setItem(0, dirt);
@@ -235,7 +240,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            webhookkill = webhookkill.replace("%target%", target.getPlayer().getDisplayName());
                            webhookkill = webhookkill.replace("%executor%", p.getPlayer().getDisplayName());
 
-                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wadmin kill"));
+                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wadmin kill").setColor(Color.RED));
 
                            inv.clear();
                            target.setHealth(0.0D);
@@ -267,7 +272,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               webhookexplode = webhookexplode.replace("%target%", target.getPlayer().getDisplayName());
                               webhookexplode = webhookexplode.replace("%executor%", p.getPlayer().getDisplayName());
 
-                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wadmin explode"));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wadmin explode").setColor(Color.RED));
 
                               l.createExplosion(5.0F, false);
                               target.setHealth(0.0D);
@@ -304,7 +309,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               webhookair = webhookair.replace("%target%", target.getPlayer().getDisplayName());
                               webhookair = webhookair.replace("%executor%", p.getPlayer().getDisplayName());
 
-                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin air"));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin air").setColor(Color.RED));
 
                               playerLocation.setY(playerLocation.getY() + 300.0D);
                               target.teleport(playerLocation);
@@ -320,6 +325,45 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            }
                         }
                      }
+                  } else if (args[0].equals("slow")){
+                     if (p.hasPermission("wadmin.slow")) {
+                        if (args.length == 1) {
+                           p.sendMessage(nonSpecifydPlayer);
+                        } else if (args.length == 2) {
+                           String playerName = args[1];
+                           Player target = Bukkit.getServer().getPlayerExact(playerName);
+                           if (target == null) {
+                              p.sendMessage(playerNotFound);
+                           } else {
+
+                              slowmsgon = slowmsgon.replace("%target%", target.getPlayer().getDisplayName());
+                              slowmsgoff = slowmsgoff.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookslowon = webhookslowon.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookslowon = webhookslowon.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookslowoff = webhookslowoff.replace("%target%", target.getPlayer().getDisplayName());
+                              webhookslowoff = webhookslowoff.replace("%executor%", p.getPlayer().getDisplayName());
+
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin slow").setColor(Color.RED));
+
+
+                                 if (target.getWalkSpeed() == 0.009f) {
+                                    target.setWalkSpeed(0.19f);
+                                    p.sendMessage(slowmsgoff);
+                                 }else {
+                                    target.setWalkSpeed(0.009f);
+                                    target.setFoodLevel(-1);
+                                    p.sendMessage(slowmsgon);
+                                 }
+
+                              try {
+                                 webhook.execute();
+                              } catch (IOException var7) {
+                                 System.out.println("stfu");
+                              }
+
+                           }
+                        }
+                     }
                   }
                }
             }
@@ -332,7 +376,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
    @Nullable
    public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
       if (args.length == 1) {
-         return Arrays.asList("creeper", "tnt", "clear", "kill", "explode", "air");
+         return Arrays.asList("creeper", "tnt", "clear", "kill", "explode", "air", "slow");
       } else if (args.length != 2) {
          if (args[0].equals("creeper")) {
             return Arrays.asList("1", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100");
