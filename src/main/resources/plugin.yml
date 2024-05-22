@@ -4,9 +4,9 @@ author: Dzsivokado
 main: dzsivokado.elsonormalpluginom.Wadmin
 api-version: '1.18'
 commands:
-  teszt:
-    description: "gg"
-  wadmin:
+  #teszt:
+    #description: "gg"
+  wtroll:
     description: "a Wadmin plugin"
     usage:
       - "/wadmin creeper <player> <amount>"

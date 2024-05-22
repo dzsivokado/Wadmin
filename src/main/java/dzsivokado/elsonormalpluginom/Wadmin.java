@@ -9,10 +9,10 @@ public final class Wadmin extends JavaPlugin {
       this.saveDefaultConfig();
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getServer().getConsoleSender().sendMessage(" ");
-      this.getServer().getConsoleSender().sendMessage("§1the Wadmin plugin started");
+      this.getServer().getConsoleSender().sendMessage("§1the Wtroll plugin started");
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=========================");
-      this.getCommand("wadmin").setExecutor(new WadminCMD(this));
+      this.getCommand("wtroll").setExecutor(new WadminCMD(this));
       //this.getCommand("teszt").setExecutor(new TesztCommand());
       //
       getServer().getPluginManager().registerEvents(new JoinListener(this), this);
@@ -24,7 +24,7 @@ public final class Wadmin extends JavaPlugin {
    public void onDisable() {
       this.getServer().getConsoleSender().sendMessage("§6=======================");
       this.getServer().getConsoleSender().sendMessage(" ");
-      this.getServer().getConsoleSender().sendMessage("§1A Wadmin plugin stopped");
+      this.getServer().getConsoleSender().sendMessage("§1A Wtroll plugin stopped");
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=======================");
    }
