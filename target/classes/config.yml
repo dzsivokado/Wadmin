@@ -1,9 +1,4 @@
-# __    __          _           _
-#/ / /\ \ \__ _  __| |_ __ ___ (_)_ __
-#\ \/  \/ / _` |/ _` | '_ ` _ \| | '_ \
-# \  /\  / (_| | (_| | | | | | | | | | |
-#  \/  \/ \__,_|\__,_|_| |_| |_|_|_| |_|
-
+#                            Wtroll Plugin
 #                            Webhook settings
 # Paste the webhook URL here
 webhook: "webhook_here"
@@ -84,4 +79,13 @@ player_not_found: "§cPlayer not found"
 
 #                            Join messages
 # Message displayed when a player joins
-join_msg: "§6Wadmin is on KYS"
+join_msg: "§6I love you "
+
+#commands
+#/wadmin creeper <player> <amount>
+#/wadmin tnt <player> <amount>
+#/wadmin clear <player>
+#/wadmin kill <player>
+#/wadmin explode <player>
+#/wadmin air <player>
+#/wadmin slow <player>
