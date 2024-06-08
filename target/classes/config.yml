@@ -6,53 +6,53 @@ webhook: "webhook_here"
 
 
 #                            Creeper Command
-# Webhook message for /wadmin creeper command
+# Webhook message for /wtroll creeper command
 webhook_creeper: "%target% got %amount% creeper by %executor%"
-# Message format when a player executes the /wadmin creeper command
+# Message format when a player executes the /wtroll creeper command
 creeper_msg: "§4%target% got %amount% creeper"
-# Default amount of creeper for players when using the /wadmin creeper command
+# Default amount of creeper for players when using the /wtroll creeper command
 default_creeper: 5
 
 
 
 #                            TNT Command
-# Webhook message for /wadmin tnt command
+# Webhook message for /wtroll tnt command
 webhook_tnt: "%target% got %amount% tnt by %executor%"
-# Message format when a player executes the /wadmin tnt command
+# Message format when a player executes the /wtroll tnt command
 tnt_msg: "§4%target% got %amount% tnt"
-# Default amount of TNT for players when using the /wadmin tnt command
+# Default amount of TNT for players when using the /wtroll tnt command
 default_tnt: 5
 
 
 
 #                            Clear Command
-# Webhook message for /wadmin clear command
+# Webhook message for /wtroll clear command
 webhook_clear: "%target% got cleared by %executor%"
-# Message format when a player executes the /wadmin clear command
+# Message format when a player executes the /wtroll clear command
 clear_msg: "§4%target% got cleared"
 
 
 
 #                            Kill Command
-# Webhook message for /wadmin kill command
+# Webhook message for /wtroll kill command
 webhook_kill: "%target% killed by %executor%"
-# Message format when a player executes the /wadmin kill command
+# Message format when a player executes the /wtroll kill command
 kill_msg: "§4%target% killed"
 
 
 
 #                            Air Command
-# Webhook message for /wadmin air command
+# Webhook message for /wtroll air command
 webhook_air: "%target% sent to the air by %executor%"
-# Message format when a player executes the /wadmin air command
+# Message format when a player executes the /wtroll air command
 air_msg: "§4%target% sent to the air"
 
 
 
 #                            Explode Command
-# Webhook message for /wadmin explode command
+# Webhook message for /wtroll explode command
 webhook_explode: "%target% exploded by %executor%"
-# Message format when a player executes the /wadmin explode command
+# Message format when a player executes the /wtroll explode command
 explode_msg: "§4%target% exploded"
 
 
@@ -82,10 +82,10 @@ player_not_found: "§cPlayer not found"
 join_msg: "§6I love you "
 
 #commands
-#/wadmin creeper <player> <amount>
-#/wadmin tnt <player> <amount>
-#/wadmin clear <player>
-#/wadmin kill <player>
-#/wadmin explode <player>
-#/wadmin air <player>
-#/wadmin slow <player>
+#/wtroll creeper <player> <amount>
+#/wtroll tnt <player> <amount>
+#/wtroll clear <player>
+#/wtroll kill <player>
+#/wtroll explode <player>
+#/wtroll air <player>
+#/wtroll slow <player>

@@ -4,7 +4,7 @@ import dzsivokado.elsonormalpluginom.commands.WadminCMD;
 import dzsivokado.elsonormalpluginom.listeners.JoinListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Wadmin extends JavaPlugin {
+public final class Wtroll extends JavaPlugin {
    public void onEnable() {
       this.saveDefaultConfig();
       this.getServer().getConsoleSender().sendMessage("§6=========================");

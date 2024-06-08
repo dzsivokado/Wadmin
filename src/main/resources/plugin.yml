@@ -1,43 +1,43 @@
-name: Wadmin
+name: Wtroll
 version: '1.0.0-alpha'
 author: Dzsivokado
-main: dzsivokado.elsonormalpluginom.Wadmin
+main: dzsivokado.elsonormalpluginom.Wtroll
 api-version: '1.18'
 commands:
   #teszt:
     #description: "gg"
   wtroll:
-    description: "a Wadmin plugin"
+    description: "a wtroll plugin"
     usage:
-      - "/wadmin creeper <player> <amount>"
-      - "/wadmin tnt <player> <amount>"
-      - "/wadmin clear <player>"
-      - "/wadmin kill <player>"
-      - "/wadmin explode <player>"
-      - "/wadmin air <player>"
-      - "/wadmin slow <player>"
+      - "/wtroll creeper <player> <amount>"
+      - "/wtroll tnt <player> <amount>"
+      - "/wtroll clear <player>"
+      - "/wtroll kill <player>"
+      - "/wtroll explode <player>"
+      - "/wtroll air <player>"
+      - "/wtroll slow <player>"
 permissions:
-  wadmin.*:
-    description: "wadmin commands"
+  wtroll.*:
+    description: "wtroll commands"
     children:
-      - wadmin.creeper: true
-      - wadmin.tnt: true
-      - wadmin.clear: true
-      - wadmin.kill: true
-      - wadmin.explode: true
-      - wadmin.air: true
-      - wadmin.slow: true
-  wadmin.tnt:
-    description: "wadmin tnt"
-  wadmin.creeper:
-    description: "wadmin creeper"
-  wadmin.clear:
-    description: "wadmin clear"
-  wadmin.kill:
-    description: "wadmin kill"
-  wadmin.explode:
-    description: "wadmin explode"
-  wadmin.air:
-    description: "wadmin air"
-  wadmin.slow:
-    description: "wadmin slow"
+      - wtroll.creeper: true
+      - wtroll.tnt: true
+      - wtroll.clear: true
+      - wtroll.kill: true
+      - wtroll.explode: true
+      - wtroll.air: true
+      - wtroll.slow: true
+  wtroll.tnt:
+    description: "wtroll tnt"
+  wtroll.creeper:
+    description: "wtroll creeper"
+  wtroll.clear:
+    description: "wtroll clear"
+  wtroll.kill:
+    description: "wtroll kill"
+  wtroll.explode:
+    description: "wtroll explode"
+  wtroll.air:
+    description: "wtroll air"
+  wtroll.slow:
+    description: "wtroll slow"

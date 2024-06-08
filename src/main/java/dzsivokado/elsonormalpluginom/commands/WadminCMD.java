@@ -1,6 +1,6 @@
 package dzsivokado.elsonormalpluginom.commands;
 
-import dzsivokado.elsonormalpluginom.Wadmin;
+import dzsivokado.elsonormalpluginom.Wtroll;
 import dzsivokado.elsonormalpluginom.apis.DiscordWebhook;
 import org.bukkit.*;
 import org.bukkit.command.Command;
@@ -21,10 +21,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class WadminCMD implements CommandExecutor, TabExecutor {
-   private final Wadmin plugin;
+   private final Wtroll plugin;
    private String webhookURL;
 
-   public WadminCMD(Wadmin plugin) {
+   public WadminCMD(Wtroll plugin) {
       this.plugin = plugin;
    }
 
@@ -56,19 +56,19 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
       if (sender instanceof Player) {
          Player p = (Player)sender;
          if (args.length == 0) {
-            p.sendMessage("§6/wadmin creeper <player> <amount>");
-            p.sendMessage("§6/wadmin tnt <player> <amount>");
-            p.sendMessage("§6/wadmin clear <player>");
-            p.sendMessage("§6/wadmin kill <player>");
-            p.sendMessage("§6/wadmin explode <player>");
-            p.sendMessage("§6/wadmin air <player>");
-            p.sendMessage("§6/wadmin slow <player> ");
+            p.sendMessage("§6/wtroll creeper <player> <amount>");
+            p.sendMessage("§6/wtroll tnt <player> <amount>");
+            p.sendMessage("§6/wtroll clear <player>");
+            p.sendMessage("§6/wtroll kill <player>");
+            p.sendMessage("§6/wtroll explode <player>");
+            p.sendMessage("§6/wtroll air <player>");
+            p.sendMessage("§6/wtroll slow <player> ");
          } else if (args.length >= 1) {
 
 
             Integer szam;
             if (args[0].equals("creeper")) {
-               if (p.hasPermission("wadmin.creeper")) {
+               if (p.hasPermission("wtroll.creeper")) {
                   if (args.length == 1) {
                      p.sendMessage(nonSpecifydPlayer);
                   } else if (args.length == 2) {
@@ -86,7 +86,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
                         webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper").setColor(Color.RED));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wtroll creeper").setColor(Color.RED));
 
                         for (int i = 0; i < defacreeper; ++i) {
                            w.spawnEntity(l, EntityType.CREEPER);
@@ -115,7 +115,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
                         webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wadmin creeper").setColor(Color.RED));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wtroll creeper").setColor(Color.RED));
 
                         for (int i = 0; i < szam; ++i) {
                            w.spawnEntity(l, EntityType.CREEPER);
@@ -132,7 +132,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                   }
                }
             } else if (args[0].equals("tnt")) {
-               if (p.hasPermission("wadmin.tnt")) {
+               if (p.hasPermission("wtroll.tnt")) {
                   if (args.length == 1) {
                      p.sendMessage(nonSpecifydPlayer);
                   } else if (args.length == 2) {
@@ -149,7 +149,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
                         webhooktnt = webhooktnt.replace("%amount%", defatnt.toString());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt").setColor(Color.RED));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wtroll tnt").setColor(Color.RED));
 
                         for (int i = 0; i < defatnt; ++i) {
                            w.spawnEntity(l, EntityType.PRIMED_TNT);
@@ -177,7 +177,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
                         webhooktnt = webhooktnt.replace("%amount%", szam.toString());
 
-                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wadmin tnt").setColor(Color.RED));
+                        webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wtroll tnt").setColor(Color.RED));
 
                         for (int i = 0; i < szam; ++i) {
                            w.spawnEntity(l, EntityType.PRIMED_TNT);
@@ -194,7 +194,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                }
             } else {
                if (args[0].equals("clear")) {
-                  if (p.hasPermission("wadmin.clear")) {
+                  if (p.hasPermission("wtroll.clear")) {
                      if (args.length == 1) {
                         p.sendMessage(nonSpecifydPlayer);
                      } else if (args.length == 2) {
@@ -210,7 +210,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            webhookclear = webhookclear.replace("%target%", target.getPlayer().getDisplayName());
                            webhookclear = webhookclear.replace("%executor%", p.getPlayer().getDisplayName());
 
-                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wadmin clear").setColor(Color.RED));
+                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wtroll clear").setColor(Color.RED));
 
                            inv.clear();
                            inv.setItem(0, dirt);
@@ -226,7 +226,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                      }
                   }
                } else if (args[0].equals("kill")) {
-                  if (p.hasPermission("wadmin.kill")) {
+                  if (p.hasPermission("wtroll.kill")) {
                      if (args.length == 1) {
                         p.sendMessage(nonSpecifydPlayer);
                      } else if (args.length == 2) {
@@ -240,7 +240,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            webhookkill = webhookkill.replace("%target%", target.getPlayer().getDisplayName());
                            webhookkill = webhookkill.replace("%executor%", p.getPlayer().getDisplayName());
 
-                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wadmin kill").setColor(Color.RED));
+                           webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wtroll kill").setColor(Color.RED));
 
                            inv.clear();
                            target.setHealth(0.0D);
@@ -257,7 +257,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                } else {
 
                   if (args[0].equals("explode")) {
-                     if (p.hasPermission("wadmin.explode")) {
+                     if (p.hasPermission("wtroll.explode")) {
                         if (args.length == 1) {
                            p.sendMessage(nonSpecifydPlayer);
                         } else if (args.length == 2) {
@@ -272,7 +272,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               webhookexplode = webhookexplode.replace("%target%", target.getPlayer().getDisplayName());
                               webhookexplode = webhookexplode.replace("%executor%", p.getPlayer().getDisplayName());
 
-                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wadmin explode").setColor(Color.RED));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wtroll explode").setColor(Color.RED));
 
                               l.createExplosion(5.0F, false);
                               target.setHealth(0.0D);
@@ -291,7 +291,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   } else if (args[0].equals("air")) {
-                     if (p.hasPermission("wadmin.air")) {
+                     if (p.hasPermission("wtroll.air")) {
                         if (args.length == 1) {
                            p.sendMessage(nonSpecifydPlayer);
                         } else if (args.length == 2) {
@@ -309,7 +309,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               webhookair = webhookair.replace("%target%", target.getPlayer().getDisplayName());
                               webhookair = webhookair.replace("%executor%", p.getPlayer().getDisplayName());
 
-                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin air").setColor(Color.RED));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wtroll air").setColor(Color.RED));
 
                               playerLocation.setY(playerLocation.getY() + 300.0D);
                               target.teleport(playerLocation);
@@ -326,7 +326,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   } else if (args[0].equals("slow")){
-                     if (p.hasPermission("wadmin.slow")) {
+                     if (p.hasPermission("wtroll.slow")) {
                         if (args.length == 1) {
                            p.sendMessage(nonSpecifydPlayer);
                         } else if (args.length == 2) {
@@ -343,7 +343,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               webhookslowoff = webhookslowoff.replace("%target%", target.getPlayer().getDisplayName());
                               webhookslowoff = webhookslowoff.replace("%executor%", p.getPlayer().getDisplayName());
 
-                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wadmin slow").setColor(Color.RED));
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wtroll slow").setColor(Color.RED));
 
 
                                  if (target.getWalkSpeed() == 0.009f) {

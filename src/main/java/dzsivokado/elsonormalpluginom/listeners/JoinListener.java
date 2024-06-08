@@ -1,17 +1,17 @@
 package dzsivokado.elsonormalpluginom.listeners;
 
-import dzsivokado.elsonormalpluginom.Wadmin;
+import dzsivokado.elsonormalpluginom.Wtroll;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 public class JoinListener implements Listener {
 
-    private final Wadmin plugin;
+    private final Wtroll plugin;
 
 
 
-    public JoinListener(Wadmin plugin) {
+    public JoinListener(Wtroll plugin) {
         this.plugin = plugin;
     }
 
