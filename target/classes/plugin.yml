@@ -1,11 +1,12 @@
 name: Wtroll
-version: '1.0.0-alpha'
+version: '1.2.0'
 author: Dzsivokado
 main: dzsivokado.elsonormalpluginom.Wtroll
 api-version: '1.18'
+depend: [ ProtocolLib ]
 commands:
-  #teszt:
-    #description: "gg"
+  teszt:
+    description: "gg"
   wtroll:
     description: "a wtroll plugin"
     usage:
@@ -27,6 +28,9 @@ permissions:
       - wtroll.explode: true
       - wtroll.air: true
       - wtroll.slow: true
+      - wtroll.demo: true
+      - wtroll.endgame: true
+      - wtroll.noescape: true
   wtroll.tnt:
     description: "wtroll tnt"
   wtroll.creeper:

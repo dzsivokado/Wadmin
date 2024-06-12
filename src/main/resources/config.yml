@@ -67,6 +67,24 @@ slow_msg_on: "§4%target% now slow"
 # Message format when a player deactivates the slowness
 slow_msg_off: "§2%target% now not slow"
 
+#                            Demo Command
+# Webhook message for /wtroll demo command
+webhook_demo: "%target% forced to buy mineraft by %executor%"
+# Message format when a player executes the /wtroll demo command
+demo_msg: "§4%target% bought minecraft"
+
+#                            Endgame Command
+# Webhook message for /wtroll endgame command
+webhook_endgame: "%target% forced to buy mineraft %executor%"
+# Message format when a player executes the /wtroll demo command
+endgame_msg: "§4%target% completed the game"
+
+#                            Endgame Command
+# Webhook message for /wtroll noescape command
+webhook_noescape: "%target% stuck in a loading screen by  %executor%"
+# Message format when a player executes the /wtroll noescape command
+noescape_msg: "§4%target% stuck in a loading screen"
+
 
 
 #                            Error Messages
@@ -81,11 +99,3 @@ player_not_found: "§cPlayer not found"
 # Message displayed when a player joins
 join_msg: "§6I love you "
 
-#commands
-#/wtroll creeper <player> <amount>
-#/wtroll tnt <player> <amount>
-#/wtroll clear <player>
-#/wtroll kill <player>
-#/wtroll explode <player>
-#/wtroll air <player>
-#/wtroll slow <player>
