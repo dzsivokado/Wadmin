@@ -79,11 +79,23 @@ webhook_endgame: "%target% forced to buy mineraft %executor%"
 # Message format when a player executes the /wtroll demo command
 endgame_msg: "§4%target% completed the game"
 
-#                            Endgame Command
+#                            Noescape Command
 # Webhook message for /wtroll noescape command
 webhook_noescape: "%target% stuck in a loading screen by  %executor%"
 # Message format when a player executes the /wtroll noescape command
 noescape_msg: "§4%target% stuck in a loading screen"
+
+#                            Lookdown Command
+# Webhook message for /wtroll lookdown command
+webhook_lookdown: "%target% now facing down by  %executor%"
+# Message format when a player executes the /wtroll lookdown command
+lookdown_msg: "§4%target% found a coin"
+
+#                            Lookdown Command
+# Webhook message for /wtroll lookup command
+webhook_lookup: "%target% now facing up by  %executor%"
+# Message format when a player executes the /wtroll lookup command
+lookup_msg: "§4%target% seen a bird"
 
 
 
@@ -98,4 +110,3 @@ player_not_found: "§cPlayer not found"
 #                            Join messages
 # Message displayed when a player joins
 join_msg: "§6I love you "
-

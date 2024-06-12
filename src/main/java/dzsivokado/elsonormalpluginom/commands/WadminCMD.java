@@ -49,6 +49,8 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
       String demomsg = this.plugin.getConfig().getString("demo_msg");
       String endgmsg = this.plugin.getConfig().getString("endgame_msg");
       String noescmsg = this.plugin.getConfig().getString("noescape_msg");
+      String lookdownmsg = this.plugin.getConfig().getString("lookdown_msg");
+      String lookupmsg = this.plugin.getConfig().getString("lookup_msg");
       Integer defatnt = this.plugin.getConfig().getInt("default_tnt");
       Integer defacreeper = this.plugin.getConfig().getInt("default_creeper");
       this.webhookURL = this.plugin.getConfig().getString("webhook");
@@ -63,6 +65,8 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
       String webhookdemo = this.plugin.getConfig().getString("webhook_demo");
       String webhookendg = this.plugin.getConfig().getString("webhook_endgame");
       String webhooknoesc = this.plugin.getConfig().getString("webhook_noescape");
+      String webhooklookdown = this.plugin.getConfig().getString("webhook_lookdown");
+      String webhooklookup = this.plugin.getConfig().getString("webhook_lookup");
 
 
 
@@ -78,6 +82,11 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
             p.sendMessage("§6/wtroll explode <player>");
             p.sendMessage("§6/wtroll air <player>");
             p.sendMessage("§6/wtroll slow <player> ");
+            p.sendMessage("§6/wtroll demo <player> ");
+            p.sendMessage("§6/wtroll endgame <player> ");
+            p.sendMessage("§6/wtroll noescape <player> ");
+            p.sendMessage("§6/wtroll lookdown <player>");
+            p.sendMessage("§6/wtroll lookup <player>");
          } else if (args.length >= 1) {
 
 
@@ -523,6 +532,90 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            }
                         }
                      }
+                  }else if (args[0].equals("lookdown")) {
+                     if (p.hasPermission("wtroll.lookdown")) {
+                        if (args.length == 1) {
+                           p.sendMessage(nonSpecifydPlayer);
+                        } else if (args.length == 2) {
+                           String playerName = args[1];
+                           Player target = Bukkit.getServer().getPlayerExact(playerName);
+                           if (target == null) {
+                              p.sendMessage(playerNotFound);
+                           } else {
+
+
+                              lookdownmsg = lookdownmsg.replace("%target%", target.getPlayer().getDisplayName());
+                              webhooklookdown = webhooklookdown.replace("%target%", target.getPlayer().getDisplayName());
+                              webhooklookdown = webhooklookdown.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooklookdown).setTitle("/wtroll lookdown").setColor(Color.RED));
+
+
+                              World world = target.getWorld();
+                              Location loc = target.getLocation();
+                              Double x = loc.getX();
+                              Double y = loc.getY();
+                              Double z = loc.getZ();
+                              float yaw = loc.getYaw() - 180;
+                              float pitch = 180;
+
+
+
+
+                              Location goal = new Location(world, x, y, z, yaw, pitch);
+                              target.teleport(goal);
+                              p.sendMessage(lookdownmsg);
+
+                              try {
+                                 webhook.execute();
+                              } catch (IOException var7) {
+                                 System.out.println("Webhook not connected");
+                              }
+
+                           }
+                        }
+                     }
+                  }else if (args[0].equals("lookup")) {
+                     if (p.hasPermission("wtroll.lookup")) {
+                        if (args.length == 1) {
+                           p.sendMessage(nonSpecifydPlayer);
+                        } else if (args.length == 2) {
+                           String playerName = args[1];
+                           Player target = Bukkit.getServer().getPlayerExact(playerName);
+                           if (target == null) {
+                              p.sendMessage(playerNotFound);
+                           } else {
+
+
+                              lookupmsg = lookupmsg.replace("%target%", target.getPlayer().getDisplayName());
+                              webhooklookup = webhooklookup.replace("%target%", target.getPlayer().getDisplayName());
+                              webhooklookup = webhooklookup.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooklookup).setTitle("/wtroll lookup").setColor(Color.RED));
+
+
+                              World world = target.getWorld();
+                              Location loc = target.getLocation();
+                              Double x = loc.getX();
+                              Double y = loc.getY();
+                              Double z = loc.getZ();
+                              float yaw = loc.getYaw() - 180;
+                              float pitch = -180;
+
+
+
+
+                              Location goal = new Location(world, x, y, z, yaw, pitch);
+                              target.teleport(goal);
+                              p.sendMessage(lookupmsg);
+
+                              try {
+                                 webhook.execute();
+                              } catch (IOException var7) {
+                                 System.out.println("Webhook not connected");
+                              }
+
+                           }
+                        }
+                     }
                   }
                }
             }
@@ -535,7 +628,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
    @Nullable
    public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
       if (args.length == 1) {
-         return Arrays.asList("creeper", "tnt", "clear", "kill", "explode", "air", "slow", "demo", "endgame", "noescape" );
+         return Arrays.asList("creeper", "tnt", "clear", "kill", "explode", "air", "slow", "demo", "endgame", "noescape", "lookdown", "lookup" );
       } else if (args.length != 2) {
          if (args[0].equals("creeper")) {
             return Arrays.asList("1", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60", "65", "70", "75", "80", "85", "90", "95", "100");

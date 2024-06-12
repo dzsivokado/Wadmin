@@ -1,8 +1,5 @@
 package dzsivokado.elsonormalpluginom;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
-import dzsivokado.elsonormalpluginom.commands.TesztCommand;
 import dzsivokado.elsonormalpluginom.commands.WadminCMD;
 import dzsivokado.elsonormalpluginom.listeners.JoinListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,27 +7,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Wtroll extends JavaPlugin {
    public void onEnable() {
       this.saveDefaultConfig();
-      ProtocolManager pm = ProtocolLibrary.getProtocolManager();
-
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§1the Wtroll plugin started");
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getCommand("wtroll").setExecutor(new WadminCMD(this));
-      this.getCommand("teszt").setExecutor(new TesztCommand());
+      //this.getCommand("teszt").setExecutor(new TesztCommand());
       //
       getServer().getPluginManager().registerEvents(new JoinListener(this), this);
       //
-      if (pm == null) {
-         getLogger().severe("You forgot to download ProtocolLib");
-      }
-
       new UpdateChecker(this, 117171).getVersion(version -> {
          if (this.getDescription().getVersion().equals(version)) {
-            getLogger().info("§6There is not a new update available .");
+            getLogger().info("There is not a new update available.");
          } else {
-            getLogger().info("§6There is a new update available download from: https://www.spigotmc.org/resources/wtroll.117171/.");
+            getLogger().info("There is a new update available. Download here: https://www.spigotmc.org/resources/wtroll.117171/");
          }
       });
 

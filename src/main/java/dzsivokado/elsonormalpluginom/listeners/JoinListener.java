@@ -18,6 +18,7 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(org.bukkit.event.player.PlayerJoinEvent e){
 
+
         Player p = e.getPlayer();
         String JoinMSG = this.plugin.getConfig().getString("join_msg");
 

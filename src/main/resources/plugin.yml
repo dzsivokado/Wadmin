@@ -1,12 +1,12 @@
 name: Wtroll
-version: '1.2.0'
+version: '1.1.0'
 author: Dzsivokado
 main: dzsivokado.elsonormalpluginom.Wtroll
 api-version: '1.18'
 depend: [ ProtocolLib ]
 commands:
-  teszt:
-    description: "gg"
+  #teszt:
+    #description: "gg"
   wtroll:
     description: "a wtroll plugin"
     usage:
@@ -17,6 +17,11 @@ commands:
       - "/wtroll explode <player>"
       - "/wtroll air <player>"
       - "/wtroll slow <player>"
+      - "/wtroll demo <player>"
+      - "/wtroll endgame <player>"
+      - "/wtroll noescape <player>"
+      - "/wtroll lookdown <player>"
+      - "/wtroll lookup <player>"
 permissions:
   wtroll.*:
     description: "wtroll commands"
@@ -31,6 +36,8 @@ permissions:
       - wtroll.demo: true
       - wtroll.endgame: true
       - wtroll.noescape: true
+      - wtroll.lookdown: true
+      - wtroll.lookup: true
   wtroll.tnt:
     description: "wtroll tnt"
   wtroll.creeper:
@@ -45,3 +52,13 @@ permissions:
     description: "wtroll air"
   wtroll.slow:
     description: "wtroll slow"
+  wtroll.demo:
+    description: "wtorll demo"
+  wtroll.endgame:
+    description: "wtorll endgame"
+  wtroll.noescape:
+    description: "wtorll noescape"
+  wtroll.lookdown:
+    description: "wtorll lookdown"
+  wtroll.lookup:
+    description: "wtorll lookup"
