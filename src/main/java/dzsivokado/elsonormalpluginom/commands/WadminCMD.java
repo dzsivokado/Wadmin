@@ -7,10 +7,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import dzsivokado.elsonormalpluginom.Wtroll;
 import dzsivokado.elsonormalpluginom.apis.DiscordWebhook;
 import org.bukkit.*;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -24,6 +21,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import static dzsivokado.elsonormalpluginom.Functions.sendersendmsg;
+
 public class WadminCMD implements CommandExecutor, TabExecutor {
    private final Wtroll plugin;
    private String webhookURL;
@@ -31,7 +30,8 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
    public WadminCMD(Wtroll plugin) {
       this.plugin = plugin;
    }
-
+   
+   public  String pname;
 
 
    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
@@ -68,38 +68,50 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
       String webhooklookdown = this.plugin.getConfig().getString("webhook_lookdown");
       String webhooklookup = this.plugin.getConfig().getString("webhook_lookup");
 
+      if (sender instanceof Player){
+         Player player = (Player) sender;
+
+         pname = player.getPlayer().getDisplayName();
+      } else if (sender instanceof ConsoleCommandSender) {
+
+         pname = "Console";
+      }
+
+
 
 
       DiscordWebhook webhook = new DiscordWebhook(this.webhookURL);
 
-      if (sender instanceof Player) {
-         Player p = (Player)sender;
+
+
          if (args.length == 0) {
-            p.sendMessage("§6/wtroll creeper <player> <amount>");
-            p.sendMessage("§6/wtroll tnt <player> <amount>");
-            p.sendMessage("§6/wtroll clear <player>");
-            p.sendMessage("§6/wtroll kill <player>");
-            p.sendMessage("§6/wtroll explode <player>");
-            p.sendMessage("§6/wtroll air <player>");
-            p.sendMessage("§6/wtroll slow <player> ");
-            p.sendMessage("§6/wtroll demo <player> ");
-            p.sendMessage("§6/wtroll endgame <player> ");
-            p.sendMessage("§6/wtroll noescape <player> ");
-            p.sendMessage("§6/wtroll lookdown <player>");
-            p.sendMessage("§6/wtroll lookup <player>");
+            sendersendmsg(sender, "§6/wtroll creeper <player> <amount>");
+            sendersendmsg(sender, "§6/wtroll tnt <player> <amount>");
+            sendersendmsg(sender, "§6/wtroll clear <player>");
+            sendersendmsg(sender, "§6/wtroll kill <player>");
+            sendersendmsg(sender, "§6/wtroll explode <player>");
+            sendersendmsg(sender, "§6/wtroll air <player>");
+            sendersendmsg(sender, "§6/wtroll slow <player> ");
+            sendersendmsg(sender, "§6/wtroll demo <player> ");
+            sendersendmsg(sender, "§6/wtroll endgame <player> ");
+            sendersendmsg(sender, "§6/wtroll noescape <player> ");
+            sendersendmsg(sender, "§6/wtroll lookdown <player>");
+            sendersendmsg(sender, "§6/wtroll lookup <player>");
          } else if (args.length >= 1) {
+
+
 
 
             Integer szam;
             if (args[0].equals("creeper")) {
-               if (p.hasPermission("wtroll.creeper")) {
+               if (sender.hasPermission("wtroll.creeper")) {
                   if (args.length == 1) {
-                     p.sendMessage(nonSpecifydPlayer);
+                     sendersendmsg(sender, nonSpecifydPlayer);
                   } else if (args.length == 2) {
                      String playerName = args[1];
                      Player target = Bukkit.getServer().getPlayerExact(playerName);
                      if (target == null) {
-                        p.sendMessage(playerNotFound);
+                        sendersendmsg(sender, playerNotFound);
                      } else {
                         World w = target.getWorld();
                         Location l = target.getLocation();
@@ -108,7 +120,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         creepermsg = creepermsg.replace("%amount%", defacreeper.toString());
                         webhookcreeper = webhookcreeper.replace("%amount%", defacreeper.toString());
                         webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
-                        webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
+                        webhookcreeper = webhookcreeper.replace("%executor%", pname);
 
                         webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wtroll creeper").setColor(Color.RED));
 
@@ -122,13 +134,13 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            System.out.println("Webhook not connected");
                         }
 
-                        p.sendMessage(creepermsg);
+                        sendersendmsg(sender, creepermsg);
                      }
                   } else if (args.length == 3) {
                      String playerName = args[1];
                      Player target = Bukkit.getServer().getPlayerExact(playerName);
                      if (target == null) {
-                        p.sendMessage(playerNotFound);
+                        sendersendmsg(sender, playerNotFound);
                      } else {
                         World w = target.getWorld();
                         Location l = target.getLocation();
@@ -137,7 +149,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         creepermsg = creepermsg.replace("%amount%", szam.toString());
                         webhookcreeper = webhookcreeper.replace("%amount%", szam.toString());
                         webhookcreeper = webhookcreeper.replace("%target%", target.getPlayer().getDisplayName());
-                        webhookcreeper = webhookcreeper.replace("%executor%", p.getPlayer().getDisplayName());
+                        webhookcreeper = webhookcreeper.replace("%executor%", pname);
 
                         webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookcreeper).setTitle("/wtroll creeper").setColor(Color.RED));
 
@@ -151,26 +163,26 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            System.out.println("Webhook not connected");
                         }
 
-                        p.sendMessage(creepermsg);
+                        sendersendmsg(sender, creepermsg);
                      }
                   }
                }
             } else if (args[0].equals("tnt")) {
-               if (p.hasPermission("wtroll.tnt")) {
+               if (sender.hasPermission("wtroll.tnt")) {
                   if (args.length == 1) {
-                     p.sendMessage(nonSpecifydPlayer);
+                     sendersendmsg(sender, nonSpecifydPlayer);
                   } else if (args.length == 2) {
                      String playerName = args[1];
                      Player target = Bukkit.getServer().getPlayerExact(playerName);
                      if (target == null) {
-                        p.sendMessage(playerNotFound);
+                        sendersendmsg(sender, playerNotFound);
                      } else {
                         World w = target.getWorld();
                         Location l = target.getLocation();
                         tntmsg = tntmsg.replace("%target%", target.getPlayer().getDisplayName());
                         tntmsg = tntmsg.replace("%amount%", defatnt.toString());
                         webhooktnt = webhooktnt.replace("%target%", target.getPlayer().getDisplayName());
-                        webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
+                        webhooktnt = webhooktnt.replace("%executor%", pname);
                         webhooktnt = webhooktnt.replace("%amount%", defatnt.toString());
 
                         webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wtroll tnt").setColor(Color.RED));
@@ -184,13 +196,13 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         } catch (IOException var7) {
                            System.out.println("Webhook not connected");
                         }
-                        p.sendMessage(tntmsg);
+                        sendersendmsg(sender, tntmsg);
                      }
                   } else if (args.length == 3) {
                      String playerName = args[1];
                      Player target = Bukkit.getServer().getPlayerExact(playerName);
                      if (target == null) {
-                        p.sendMessage(playerNotFound);
+                        sendersendmsg(sender, playerNotFound);
                      } else {
                         World w = target.getWorld();
                         Location l = target.getLocation();
@@ -198,7 +210,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         tntmsg = tntmsg.replace("%target%", target.getPlayer().getDisplayName());
                         tntmsg = tntmsg.replace("%amount%", szam.toString());
                         webhooktnt = webhooktnt.replace("%target%", target.getPlayer().getDisplayName());
-                        webhooktnt = webhooktnt.replace("%executor%", p.getPlayer().getDisplayName());
+                        webhooktnt = webhooktnt.replace("%executor%", pname);
                         webhooktnt = webhooktnt.replace("%amount%", szam.toString());
 
                         webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooktnt).setTitle("/wtroll tnt").setColor(Color.RED));
@@ -212,27 +224,27 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         } catch (IOException var7) {
                            System.out.println("Webhook not connected");
                         }
-                        p.sendMessage(tntmsg);
+                        sendersendmsg(sender, tntmsg);
                      }
                   }
                }
             } else {
                if (args[0].equals("clear")) {
-                  if (p.hasPermission("wtroll.clear")) {
+                  if (sender.hasPermission("wtroll.clear")) {
                      if (args.length == 1) {
-                        p.sendMessage(nonSpecifydPlayer);
+                        sendersendmsg(sender, nonSpecifydPlayer);
                      } else if (args.length == 2) {
                         String playerName = args[1];
                         Player target = Bukkit.getServer().getPlayerExact(playerName);
                         if (target == null) {
-                           p.sendMessage(playerNotFound);
+                           sendersendmsg(sender, playerNotFound);
                         } else {
                            Inventory inv = target.getInventory();
                            inv = target.getInventory();
                            ItemStack dirt = new ItemStack(Material.DIRT, 2304);
                            clearmsg = clearmsg.replace("%target%", target.getPlayer().getDisplayName());
                            webhookclear = webhookclear.replace("%target%", target.getPlayer().getDisplayName());
-                           webhookclear = webhookclear.replace("%executor%", p.getPlayer().getDisplayName());
+                           webhookclear = webhookclear.replace("%executor%", pname);
 
                            webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookclear).setTitle("/wtroll clear").setColor(Color.RED));
 
@@ -244,25 +256,25 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            } catch (IOException var7) {
                               System.out.println("Webhook not connected");
                            }
-                           p.sendMessage(clearmsg);
+                           sendersendmsg(sender, clearmsg);
 
                         }
                      }
                   }
                } else if (args[0].equals("kill")) {
-                  if (p.hasPermission("wtroll.kill")) {
+                  if (sender.hasPermission("wtroll.kill")) {
                      if (args.length == 1) {
-                        p.sendMessage(nonSpecifydPlayer);
+                        sendersendmsg(sender, nonSpecifydPlayer);
                      } else if (args.length == 2) {
                         String playerName = args[1];
                         Player target = Bukkit.getServer().getPlayerExact(playerName);
                         if (target == null) {
-                           p.sendMessage(playerNotFound);
+                           sendersendmsg(sender, playerNotFound);
                         } else {
                            Inventory inv = target.getInventory();
                            killmsg = killmsg.replace("%target%", target.getPlayer().getDisplayName());
                            webhookkill = webhookkill.replace("%target%", target.getPlayer().getDisplayName());
-                           webhookkill = webhookkill.replace("%executor%", p.getPlayer().getDisplayName());
+                           webhookkill = webhookkill.replace("%executor%", pname);
 
                            webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookkill).setTitle("/wtroll kill").setColor(Color.RED));
 
@@ -274,27 +286,27 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                            } catch (IOException var7) {
                               System.out.println("Webhook not connected");
                            }
-                           p.sendMessage(killmsg);
+                           sendersendmsg(sender, killmsg);
                         }
                      }
                   }
                } else {
 
                   if (args[0].equals("explode")) {
-                     if (p.hasPermission("wtroll.explode")) {
+                     if (sender.hasPermission("wtroll.explode")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
                               Location l = target.getLocation();
                               World w = l.getWorld();
                               explodemsg = explodemsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhookexplode = webhookexplode.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookexplode = webhookexplode.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookexplode = webhookexplode.replace("%executor%", pname);
 
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookexplode).setTitle("/wtroll explode").setColor(Color.RED));
 
@@ -310,19 +322,19 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                                  System.out.println("Webhook not connected");
                               }
 
-                              p.sendMessage(explodemsg);
+                              sendersendmsg(sender, explodemsg);
                            }
                         }
                      }
                   } else if (args[0].equals("air")) {
-                     if (p.hasPermission("wtroll.air")) {
+                     if (sender.hasPermission("wtroll.air")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
                               Location l = target.getLocation();
                               World w = l.getWorld();
@@ -331,7 +343,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               ItemStack viz = new ItemStack(Material.WATER_BUCKET, 1);
                               airmsg = airmsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhookair = webhookair.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookair = webhookair.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookair = webhookair.replace("%executor%", pname);
 
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wtroll air").setColor(Color.RED));
 
@@ -343,40 +355,42 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                               } catch (IOException var7) {
                                  System.out.println("Webhook not connected");
                               }
-                              p.sendMessage(airmsg);
+                              sendersendmsg(sender, airmsg);
                               inventory.setItem(4, viz);
-                              p.setGameMode(GameMode.SURVIVAL);
+                              target.setGameMode(GameMode.SURVIVAL);
                            }
                         }
                      }
                   } else if (args[0].equals("slow")) {
-                     if (p.hasPermission("wtroll.slow")) {
+                     if (sender.hasPermission("wtroll.slow")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
                               slowmsgon = slowmsgon.replace("%target%", target.getPlayer().getDisplayName());
                               slowmsgoff = slowmsgoff.replace("%target%", target.getPlayer().getDisplayName());
                               webhookslowon = webhookslowon.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookslowon = webhookslowon.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookslowon = webhookslowon.replace("%executor%", pname);
                               webhookslowoff = webhookslowoff.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookslowoff = webhookslowoff.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookslowoff = webhookslowoff.replace("%executor%", pname);
 
-                              webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookair).setTitle("/wtroll slow").setColor(Color.RED));
+
 
 
                               if (target.getWalkSpeed() == 0.009f) {
                                  target.setWalkSpeed(0.19f);
-                                 p.sendMessage(slowmsgoff);
+                                 sendersendmsg(sender, slowmsgoff);
+                                 webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookslowoff).setTitle("/wtroll slow").setColor(Color.RED));
                               } else {
                                  target.setWalkSpeed(0.009f);
                                  target.setFoodLevel(-1);
-                                 p.sendMessage(slowmsgon);
+                                 sendersendmsg(sender, slowmsgon);
+                                 webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookslowon).setTitle("/wtroll slow").setColor(Color.RED));
                               }
 
                               try {
@@ -389,20 +403,20 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }else if (args[0].equals("demo")) {
-                     if (p.hasPermission("wtroll.demo")) {
+                     if (sender.hasPermission("wtroll.demo")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
 
                               demomsg = demomsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhookdemo = webhookdemo.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookdemo = webhookdemo.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookdemo = webhookdemo.replace("%executor%", pname);
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookdemo).setTitle("/wtroll demo").setColor(Color.RED));
 
 
@@ -412,7 +426,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
 
                                pm.sendServerPacket(target, packet);
-                               p.sendMessage(demomsg);
+                               sendersendmsg(sender, demomsg);
 
 
                                try {
@@ -425,20 +439,20 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }else if (args[0].equals("endgame")) {
-                     if (p.hasPermission("wtroll.endgame")) {
+                     if (sender.hasPermission("wtroll.endgame")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
 
                               endgmsg = endgmsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhookendg = webhookendg.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookendg = webhookendg.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookendg = webhookendg.replace("%executor%", pname);
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookendg).setTitle("/wtroll endgame").setColor(Color.RED));
 
 
@@ -448,7 +462,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
 
                               pm.sendServerPacket(target, packet);
-                              p.sendMessage(endgmsg);
+                              sendersendmsg(sender, endgmsg);
 
 
                               try {
@@ -461,20 +475,20 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }else if (args[0].equals("demo")) {
-                     if (p.hasPermission("wtroll.demo")) {
+                     if (sender.hasPermission("wtroll.demo")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
 
                               demomsg = demomsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhookdemo = webhookdemo.replace("%target%", target.getPlayer().getDisplayName());
-                              webhookdemo = webhookdemo.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhookdemo = webhookdemo.replace("%executor%", pname);
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhookdemo).setTitle("/wtroll demo").setColor(Color.RED));
 
 
@@ -484,7 +498,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
 
                               pm.sendServerPacket(target, packet);
-                              p.sendMessage(demomsg);
+                              sendersendmsg(sender, demomsg);
 
 
                               try {
@@ -497,20 +511,20 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }else if (args[0].equals("noescape")) {
-                     if (p.hasPermission("wtroll.noescape")) {
+                     if (sender.hasPermission("wtroll.noescape")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
 
                               noescmsg = noescmsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhooknoesc = webhooknoesc.replace("%target%", target.getPlayer().getDisplayName());
-                              webhooknoesc = webhooknoesc.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhooknoesc = webhooknoesc.replace("%executor%", pname);
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooknoesc).setTitle("/wtroll noescape").setColor(Color.RED));
 
 
@@ -520,7 +534,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
 
                               pm.sendServerPacket(target, packet);
-                              p.sendMessage(noescmsg);
+                              sendersendmsg(sender, noescmsg);
 
 
                               try {
@@ -533,20 +547,20 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }else if (args[0].equals("lookdown")) {
-                     if (p.hasPermission("wtroll.lookdown")) {
+                     if (sender.hasPermission("wtroll.lookdown")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
 
                               lookdownmsg = lookdownmsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhooklookdown = webhooklookdown.replace("%target%", target.getPlayer().getDisplayName());
-                              webhooklookdown = webhooklookdown.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhooklookdown = webhooklookdown.replace("%executor%", pname);
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooklookdown).setTitle("/wtroll lookdown").setColor(Color.RED));
 
 
@@ -563,7 +577,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
                               Location goal = new Location(world, x, y, z, yaw, pitch);
                               target.teleport(goal);
-                              p.sendMessage(lookdownmsg);
+                              sendersendmsg(sender, lookdownmsg);
 
                               try {
                                  webhook.execute();
@@ -575,20 +589,20 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }else if (args[0].equals("lookup")) {
-                     if (p.hasPermission("wtroll.lookup")) {
+                     if (sender.hasPermission("wtroll.lookup")) {
                         if (args.length == 1) {
-                           p.sendMessage(nonSpecifydPlayer);
+                           sendersendmsg(sender, nonSpecifydPlayer);
                         } else if (args.length == 2) {
                            String playerName = args[1];
                            Player target = Bukkit.getServer().getPlayerExact(playerName);
                            if (target == null) {
-                              p.sendMessage(playerNotFound);
+                              sendersendmsg(sender, playerNotFound);
                            } else {
 
 
                               lookupmsg = lookupmsg.replace("%target%", target.getPlayer().getDisplayName());
                               webhooklookup = webhooklookup.replace("%target%", target.getPlayer().getDisplayName());
-                              webhooklookup = webhooklookup.replace("%executor%", p.getPlayer().getDisplayName());
+                              webhooklookup = webhooklookup.replace("%executor%", pname);
                               webhook.addEmbed((new DiscordWebhook.EmbedObject()).setDescription(webhooklookup).setTitle("/wtroll lookup").setColor(Color.RED));
 
 
@@ -605,7 +619,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
 
                               Location goal = new Location(world, x, y, z, yaw, pitch);
                               target.teleport(goal);
-                              p.sendMessage(lookupmsg);
+                              sendersendmsg(sender, lookupmsg);
 
                               try {
                                  webhook.execute();
@@ -617,7 +631,7 @@ public class WadminCMD implements CommandExecutor, TabExecutor {
                         }
                      }
                   }
-               }
+
             }
          }
       }

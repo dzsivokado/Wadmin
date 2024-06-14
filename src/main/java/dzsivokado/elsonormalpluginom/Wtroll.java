@@ -13,7 +13,7 @@ public final class Wtroll extends JavaPlugin {
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getCommand("wtroll").setExecutor(new WadminCMD(this));
-      //this.getCommand("teszt").setExecutor(new TesztCommand());
+      //this.getCommand("teszt").setExecutor(new TesztCommand(this));
       //
       getServer().getPluginManager().registerEvents(new JoinListener(this), this);
       //
