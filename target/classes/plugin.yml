@@ -5,8 +5,8 @@ main: dzsivokado.elsonormalpluginom.Wtroll
 api-version: '1.18'
 depend: [ ProtocolLib ]
 commands:
-  #teszt:
-    #description: "gg"
+  teszt:
+    description: "gg"
   wtroll:
     description: "a wtroll plugin"
     usage:

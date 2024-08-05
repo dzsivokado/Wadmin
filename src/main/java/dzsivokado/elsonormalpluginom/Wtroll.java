@@ -1,5 +1,6 @@
 package dzsivokado.elsonormalpluginom;
 
+import dzsivokado.elsonormalpluginom.commands.TesztCommand;
 import dzsivokado.elsonormalpluginom.commands.WadminCMD;
 import dzsivokado.elsonormalpluginom.listeners.JoinListener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +14,7 @@ public final class Wtroll extends JavaPlugin {
       this.getServer().getConsoleSender().sendMessage(" ");
       this.getServer().getConsoleSender().sendMessage("§6=========================");
       this.getCommand("wtroll").setExecutor(new WadminCMD(this));
-      //this.getCommand("teszt").setExecutor(new TesztCommand(this));
+      this.getCommand("teszt").setExecutor(new TesztCommand(this));
       //
       getServer().getPluginManager().registerEvents(new JoinListener(this), this);
       //
